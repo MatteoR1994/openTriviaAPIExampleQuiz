@@ -1,7 +1,58 @@
 const triviaArray = [];
 
+function loadCategories() {
+    fetch('https://opentdb.com/api_category.php')
+        .then(resp => resp.json())
+        .then((data) => createSelect(data.trivia_categories, 'categories-select'))
+        .catch(err => console.log(err));
+}
+
+function loadDifficulty() {
+    fetch('./assets/settings/difficulties.json')
+        .then(resp => resp.json())
+        .then((data) => createSelect(data, 'difficulty-select'))
+        .catch(err => console.log(err));
+}
+
+function loadType() {
+    fetch('./assets/settings/type.json')
+        .then(resp => resp.json())
+        .then((data) => createSelect(data, 'type-select'))
+        .catch(err => console.log(err));
+}
+
+function createSelect(data, selectId) {
+    const select = document.getElementById(selectId);
+    for (const element of data) {
+        const option = document.createElement('option');
+        option.value = element.id;
+        const textNode = document.createTextNode(element.name);
+        option.appendChild(textNode);
+        select.appendChild(option);
+    }
+}
+
+function initQuiz() {
+    loadCategories();
+    loadDifficulty();
+    loadType();
+}
+
 function loadTrivia() {
-    fetch('https://opentdb.com/api.php?amount=15')
+    const category = document.getElementById('categories-select').value;
+    const difficulty = document.getElementById('difficulty-select').value;
+    const type = document.getElementById('type-select').value;
+    let stringUrl = 'https://opentdb.com/api.php?amount=15';
+    if (category) {
+        stringUrl += ('&category=' + category);
+    }
+    if (difficulty) {
+        stringUrl += ('&difficulty=' + difficulty);
+    }
+    if (type) {
+        stringUrl += ('&type=' + type);
+    }
+    fetch(stringUrl)
         .then(resp => resp.json())
         .then(createTrivias)
         .catch(err => console.log(err));

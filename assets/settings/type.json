@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Multiple Choice",
+        "id": "multiple"
+    },
+    {
+        "name": "True / False",
+        "id": "boolean"
+    }
+]

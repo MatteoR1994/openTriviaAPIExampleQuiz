@@ -9,10 +9,20 @@
     <title>Quizzone</title>
 </head>
 <body>
-    <center>
         <h1 class="main-title">Piano della conquista del mondo</h1>
 
-        <h2 class="main-subtitle">Da non rivelare a nessuno ! grazie per la collaborazione</h2>
+        <div>
+            <select name="" id="categories-select">
+                <option value="">All</option>
+            </select>
+            <select name="" id="difficulty-select">
+                <option value="">All</option>
+            </select>
+            <select name="" id="type-select">
+                <option value="">All</option>
+            </select>
+            <button onclick="loadTrivia()">Generate Questions</button>
+        </div>
         
         <div id="question-container">
             <!-- <li class="trivia-li" id="li-0"></li>
@@ -30,16 +40,13 @@
                 <!-- <p id="points-done" class="points-done"></p>
                 <p id="text-result" class="text-result"></p> -->
             </div>
-        
-        </div>
-    </center>
-    
+        </div>    
     
 </body>
 <script src="./utility.js" charset="UTF-8"></script>
 <script src="./trivia.js" charset="UTF-8"></script>
 <script src="./script.js" charset="UTF-8"></script>
 <script>
-    loadTrivia()
+    initQuiz();
 </script>
 </html>
